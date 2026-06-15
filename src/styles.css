@@ -175,6 +175,11 @@ apex-toolbar {
 
 .apex-list-item span {
   min-width: 0;
+  color: var(--apex-color-text, inherit);
+}
+
+.apex-list-item span + * {
+  color: inherit;
 }
 
 @media (max-width: 1120px) {
