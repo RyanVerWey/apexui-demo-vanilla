@@ -2,10 +2,24 @@
   font-family: var(--apex-font-family-sans);
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 0;
+}
+
 body {
   margin: 0;
+  min-width: 0;
+  overflow-x: hidden;
   background: var(--apex-color-canvas, var(--apex-color-background));
   color: var(--apex-color-text, var(--apex-color-foreground));
+}
+
+a {
+  color: inherit;
 }
 
 .app-shell {
@@ -13,50 +27,208 @@ body {
   background: var(--apex-color-canvas, var(--apex-color-background));
 }
 
+apex-data-table,
+apex-data-grid,
+apex-workflow-board,
+apex-toolbar {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.app-bar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--apex-space-3, 12px);
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .app-main {
-  padding: var(--apex-space-6, 24px);
+  width: min(1480px, 100%);
+  margin: 0 auto;
+  padding: var(--apex-space-5, 20px);
 }
 
 .app-layout {
   display: grid;
   grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
-  gap: var(--apex-space-6, 24px);
+  gap: var(--apex-space-5, 20px);
+  align-items: start;
 }
 
-.app-page {
-  display: grid;
-  gap: var(--apex-space-6, 24px);
+.route-panel,
+.page,
+.page-heading,
+.hero-grid,
+.split-grid,
+.dashboard-grid,
+.metric-strip,
+.form-grid {
+  min-width: 0;
 }
 
-.app-hero,
-.app-split {
+.route-panel {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
   gap: var(--apex-space-5, 20px);
 }
 
-.app-grid {
+.page {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--apex-space-5, 20px);
 }
 
-.app-actions {
+.page-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--apex-space-5, 20px);
+  align-items: end;
+}
+
+.page-heading apex-typography[variant="body"] {
+  max-width: 72ch;
+}
+
+.page-heading-actions,
+.hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--apex-space-3, 12px);
   align-items: center;
 }
 
-@media (max-width: 960px) {
+.button-link {
+  display: inline-flex;
+  text-decoration: none;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+  gap: var(--apex-space-6, 24px);
+  align-items: stretch;
+}
+
+.proof-panel {
+  display: grid;
+  align-items: stretch;
+}
+
+.metric-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--apex-space-4, 16px);
+}
+
+.split-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
+  gap: var(--apex-space-5, 20px);
+  align-items: start;
+}
+
+.split-grid.wide-left {
+  grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.65fr);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--apex-space-4, 16px);
+}
+
+.dashboard-grid apex-chart {
+  grid-column: span 1;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+  gap: var(--apex-space-5, 20px);
+  align-items: start;
+}
+
+.hero-grid > *,
+.metric-strip > *,
+.split-grid > *,
+.dashboard-grid > *,
+.form-grid > * {
+  min-width: 0;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--apex-space-4, 16px);
+  padding-block: var(--apex-space-2, 8px);
+  border-bottom: 1px solid var(--apex-color-border);
+}
+
+.detail-row span {
+  color: var(--apex-color-muted);
+}
+
+.detail-row strong {
+  color: var(--apex-color-text);
+  text-align: right;
+}
+
+.apex-list-item span {
+  min-width: 0;
+}
+
+@media (max-width: 1120px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-grid apex-chart {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 920px) {
   .app-main {
     padding: var(--apex-space-4, 16px);
   }
 
   .app-layout,
-  .app-hero,
-  .app-grid,
-  .app-split {
+  .page-heading,
+  .hero-grid,
+  .split-grid,
+  .split-grid.wide-left,
+  .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .page-heading-actions {
+    justify-content: flex-start;
+  }
+
+  .metric-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .app-main {
+    padding: var(--apex-space-3, 12px);
+  }
+
+  .app-bar-actions {
+    justify-content: flex-start;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-grid apex-chart {
+    grid-column: auto;
+  }
+
+  .button-link,
+  .button-link apex-button {
+    width: 100%;
   }
 }
