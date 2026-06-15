@@ -1,0 +1,10 @@
+import "@apexui/tokens/css";
+import { defineCustomElements } from "@apexui/web-components/loader";
+import "./styles.css";
+defineCustomElements();
+const chart = document.querySelector("#support-chart") as HTMLElement & { data?: Array<{ label: string; value: number }> };
+chart.data = [{ "label": "Tokens", "value": 92 }, { "label": "Components", "value": 84 }, { "label": "Routes", "value": 73 }];
+const table = document.querySelector("#support-table") as HTMLElement & { columns?: Array<{ key: string; header: string }>; rows?: Array<Record<string, string>> };
+table.columns = [{ "key": "area", "header": "Area" }, { "key": "owner", "header": "Owner" }, { "key": "status", "header": "Status" }];
+table.rows = [{ "area": "Tokens", "owner": "Platform", "status": "Live" }, { "area": "Components", "owner": "Design system", "status": "Beta" }, { "area": "Docs", "owner": "DX", "status": "Linked" }];
+document.querySelector("#primary-action")?.addEventListener("click", () => document.querySelector("#snackbar")?.setAttribute("open", "true"));
